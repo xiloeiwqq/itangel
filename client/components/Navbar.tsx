@@ -1,128 +1,129 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import './navbar.css'
 
 const AngelWingsIcon = () => (
-  <svg width="38" height="38" viewBox="0 0 38 38" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path
-      d="M6.86039 2.15039C5.58568 3.54214 4.51419 5.17258 3.68049 6.97684L12.4314 15.1896L11.4829 16.2008L3.10989 8.34298C2.42782 10.1433 1.96863 12.0877 1.76238 14.1205L10.3833 18.4786L9.75715 19.717L1.65573 15.6211C1.58425 17.4357 1.71339 19.3072 2.05925 21.199L9.52046 21.816L9.40691 23.1983L2.35836 22.6161C2.4135 22.8455 2.4708 23.0752 2.5324 23.3049C2.86119 24.5302 3.27013 25.7051 3.74773 26.8257C4.39766 26.7058 5.06942 26.5827 5.81198 26.4429C7.79762 26.0694 9.75247 25.6963 9.75247 25.6963L10.0122 27.0576C10.0122 27.0576 8.05524 27.4327 6.06707 27.8068C5.47243 27.9187 4.89463 28.0272 4.34608 28.1292C4.98807 29.4285 5.72803 30.6442 6.54719 31.7659L11.0629 29.2217L11.7426 30.43L7.40775 32.8746C8.31337 33.9723 9.299 34.9665 10.3486 35.8433L11.622 34.3334C11.7244 32.8092 11.9903 31.5335 12.6889 30.4948C13.1593 29.7953 13.8348 29.246 14.7043 28.8667C14.0909 27.9151 13.6041 26.8393 13.2849 25.6498C12.2068 21.6309 13.328 17.5978 15.9869 15.4007L6.86024 2.15039H6.86039ZM31.4151 2.15039L22.2887 15.4007C24.9476 17.5978 26.0712 21.6308 24.993 25.6498C24.6768 26.8282 24.1938 27.894 23.5874 28.839C24.5037 29.2386 25.1872 29.8411 25.6285 30.5947C26.2081 31.5842 26.4074 32.7557 26.4751 34.1176L27.9292 35.8432C28.9786 34.9664 29.9645 33.9723 30.8701 32.8744L26.533 30.43L27.2149 29.2217L31.7305 31.7659C32.5499 30.6439 33.2895 29.4287 33.9317 28.1292C33.3825 28.0272 32.803 27.9187 32.2083 27.8068C30.2202 27.4327 28.2631 27.0576 28.2631 27.0576L28.5229 25.6962C28.5229 25.6962 30.4802 26.0693 32.4658 26.4429C33.1537 26.5724 33.8417 26.7008 34.53 26.8281C35.0173 25.6836 35.4235 24.5063 35.7454 23.3049C35.807 23.0752 35.8643 22.8455 35.9193 22.6161L28.8708 23.1981L28.7573 21.8158L36.2185 21.199C36.5644 19.3072 36.6913 17.4357 36.6197 15.621L28.5183 19.7169L27.8921 18.4784L36.5154 14.1204C36.3088 12.0868 35.8507 10.1415 35.1679 8.34061L26.795 16.2007L25.8442 15.1896L34.5949 6.97684C33.761 5.17258 32.6898 3.54221 31.4151 2.15039H31.4151ZM19.0068 21.5259C18.2311 21.5259 17.5097 21.9224 16.945 22.6486C16.3802 23.3747 16.0056 24.422 16.0056 25.5942C16.0056 26.7663 16.3801 27.8135 16.9449 28.5397C17.5097 29.2659 18.2311 29.6647 19.0068 29.6647C19.7825 29.6647 20.5016 29.2659 21.0664 28.5398C21.6312 27.8136 22.0057 26.7664 22.0057 25.5943C22.0057 24.4222 21.6311 23.3749 21.0664 22.6487C20.5016 21.9226 19.7825 21.5262 19.0068 21.5262V21.5259ZM21.9477 29.7783C21.1788 30.6051 20.149 31.1396 19.0067 31.1396C17.8966 31.1396 16.8922 30.6351 16.1308 29.8478C15.9332 29.8968 15.7488 29.9505 15.5787 30.0102C14.7279 30.3085 14.214 30.7123 13.8393 31.2697C13.1572 32.2835 12.9826 34.0195 12.9555 36.4092H25.1135C25.1034 34.0676 25.0278 32.313 24.4315 31.2951C24.1035 30.7347 23.6451 30.3342 22.8312 30.0287C22.5739 29.9321 22.2796 29.8479 21.9476 29.7782L21.9477 29.7783Z"
-      fill="#98FF53"
-    />
-  </svg>
+    <svg width="246" height="76" viewBox="0 0 246 76" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect y="10" width="246" height="57" rx="28.5" fill="black"/>
+      <path
+          d="M95.5237 29.8515H98.6041V48H95.5237V29.8515ZM110.476 32.6351V48H107.395V32.6351H101.902V29.8515H115.968V32.6351H110.476ZM118.656 41.6165V38.8701H127.304V41.6165H118.656ZM134.26 43.8804L132.442 48H129.176L137.192 29.8515H140.458L148.438 48H145.172L143.353 43.8804H134.26ZM142.128 41.0227L138.825 33.5629L135.522 41.0227H142.128ZM153.452 48H150.557V34.1938H153.452V36.6804C153.922 35.8392 154.565 35.1835 155.382 34.7134C156.223 34.2186 157.114 33.9711 158.054 33.9711C159.662 33.9711 160.936 34.4536 161.876 35.4186C162.817 36.3835 163.287 37.7567 163.287 39.5381V48H160.355V40.4289C160.355 37.8804 159.303 36.6062 157.2 36.6062C156.136 36.6062 155.246 36.9526 154.528 37.6454C153.81 38.3134 153.452 39.266 153.452 40.5031V48ZM180.093 34.1938V46.2186C180.093 48.5938 179.45 50.4124 178.164 51.6742C176.877 52.9361 175.157 53.567 173.005 53.567C170.976 53.567 169.095 52.9113 167.364 51.6L168.737 49.4103C170.122 50.4247 171.495 50.932 172.856 50.932C175.825 50.932 177.31 49.4474 177.31 46.4784V44.6969C176.889 45.5134 176.271 46.1691 175.454 46.6639C174.638 47.134 173.735 47.3691 172.745 47.3691C170.914 47.3691 169.405 46.7381 168.217 45.4763C167.054 44.1897 166.473 42.5938 166.473 40.6887C166.473 38.7588 167.054 37.1629 168.217 35.901C169.405 34.6144 170.914 33.9711 172.745 33.9711C174.576 33.9711 176.06 34.7258 177.199 36.2351V34.1938H180.093ZM173.227 44.734C174.39 44.734 175.343 44.3381 176.085 43.5464C176.827 42.7299 177.199 41.7278 177.199 40.5402C177.199 39.3278 176.815 38.3258 176.048 37.534C175.306 36.7175 174.353 36.3093 173.19 36.3093C172.027 36.3093 171.087 36.7299 170.37 37.5711C169.677 38.3876 169.331 39.3773 169.331 40.5402C169.331 41.7278 169.689 42.7299 170.407 43.5464C171.124 44.3381 172.065 44.734 173.227 44.734ZM197.148 42.3588H186.311C186.385 43.3485 186.843 44.1526 187.684 44.7711C188.525 45.3897 189.503 45.699 190.616 45.699C192.373 45.699 193.684 45.1546 194.55 44.066L196.22 45.8845C194.736 47.4433 192.793 48.2227 190.393 48.2227C188.414 48.2227 186.756 47.567 185.42 46.2557C184.084 44.9443 183.416 43.2124 183.416 41.0598C183.416 38.9567 184.097 37.2495 185.457 35.9381C186.818 34.6268 188.464 33.9711 190.393 33.9711C192.323 33.9711 193.932 34.5526 195.218 35.7155C196.505 36.8783 197.148 38.4247 197.148 40.3546V42.3588ZM194.253 40.0577C194.253 38.9443 193.894 38.066 193.177 37.4227C192.484 36.7794 191.581 36.4577 190.468 36.4577C189.354 36.4577 188.377 36.7918 187.536 37.4598C186.719 38.1278 186.311 38.9938 186.311 40.0577H194.253ZM203.268 48H200.373V28.7381H203.268V48Z"
+          fill="#98FF53"/>
+      <path
+          d="M45.8604 21.1504C44.5857 22.5421 43.5142 24.1726 42.6805 25.9768L51.4314 34.1896L50.4829 35.2008L42.1099 27.343C41.4278 29.1433 40.9686 31.0877 40.7624 33.1205L49.3833 37.4786L48.7571 38.717L40.6557 34.6211C40.5843 36.4357 40.7134 38.3072 41.0593 40.199L48.5205 40.816L48.4069 42.1983L41.3584 41.6161C41.4135 41.8455 41.4708 42.0752 41.5324 42.3049C41.8612 43.5302 42.2701 44.7051 42.7477 45.8257C43.3977 45.7058 44.0694 45.5827 44.812 45.4429C46.7976 45.0694 48.7525 44.6963 48.7525 44.6963L49.0122 46.0576C49.0122 46.0576 47.0552 46.4327 45.0671 46.8068C44.4724 46.9187 43.8946 47.0272 43.3461 47.1292C43.9881 48.4285 44.728 49.6442 45.5472 50.7659L50.0629 48.2217L50.7426 49.43L46.4078 51.8746C47.3134 52.9723 48.299 53.9665 49.3486 54.8433L50.622 53.3334C50.7244 51.8092 50.9903 50.5335 51.6889 49.4948C52.1593 48.7953 52.8348 48.246 53.7043 47.8667C53.0909 46.9151 52.6041 45.8393 52.2849 44.6498C51.2068 40.6309 52.328 36.5978 54.9869 34.4007L45.8602 21.1504H45.8604ZM70.4151 21.1504L61.2887 34.4007C63.9476 36.5978 65.0712 40.6308 63.993 44.6498C63.6768 45.8282 63.1938 46.894 62.5874 47.839C63.5037 48.2386 64.1872 48.8411 64.6285 49.5947C65.2081 50.5842 65.4074 51.7557 65.4751 53.1176L66.9292 54.8432C67.9786 53.9664 68.9645 52.9723 69.8701 51.8744L65.533 49.43L66.2149 48.2217L70.7305 50.7659C71.5499 49.6439 72.2895 48.4287 72.9317 47.1292C72.3825 47.0272 71.803 46.9187 71.2083 46.8068C69.2202 46.4327 67.2631 46.0576 67.2631 46.0576L67.5229 44.6962C67.5229 44.6962 69.4802 45.0693 71.4658 45.4429C72.1537 45.5724 72.8417 45.7008 73.53 45.8281C74.0173 44.6836 74.4235 43.5063 74.7454 42.3049C74.807 42.0752 74.8643 41.8455 74.9193 41.6161L67.8708 42.1981L67.7573 40.8158L75.2185 40.199C75.5644 38.3072 75.6913 36.4357 75.6197 34.621L67.5183 38.7169L66.8921 37.4784L75.5154 33.1204C75.3088 31.0868 74.8507 29.1415 74.1679 27.3406L65.795 35.2007L64.8442 34.1896L73.5949 25.9768C72.761 24.1726 71.6898 22.5422 70.4151 21.1504H70.4151ZM58.0068 40.5259C57.2311 40.5259 56.5097 40.9224 55.945 41.6486C55.3802 42.3747 55.0056 43.422 55.0056 44.5942C55.0056 45.7663 55.3801 46.8135 55.9449 47.5397C56.5097 48.2659 57.2311 48.6647 58.0068 48.6647C58.7825 48.6647 59.5016 48.2659 60.0664 47.5398C60.6312 46.8136 61.0057 45.7664 61.0057 44.5943C61.0057 43.4222 60.6311 42.3749 60.0664 41.6487C59.5016 40.9226 58.7825 40.5262 58.0068 40.5262V40.5259ZM60.9477 48.7783C60.1788 49.6051 59.149 50.1396 58.0067 50.1396C56.8966 50.1396 55.8922 49.6351 55.1308 48.8478C54.9332 48.8968 54.7488 48.9505 54.5787 49.0102C53.7279 49.3085 53.214 49.7123 52.8393 50.2697C52.1572 51.2835 51.9826 53.0195 51.9555 55.4092H64.1135C64.1034 53.0676 64.0278 51.313 63.4315 50.2951C63.1035 49.7347 62.6451 49.3342 61.8312 49.0287C61.5739 48.9321 61.2796 48.8479 60.9476 48.7782L60.9477 48.7783Z"
+          fill="#98FF53"/>
+    </svg>
+
 );
 
 const navLinks = [
-  { label: "Главная", href: "/", active: true },
-  { label: "Услуги", href: "/services" },
-  { label: "О нас", href: "/about" },
+  {label: "Главная", href: "/", active: true},
+  {label: "Услуги", href: "/services"},
+  {label: "О нас", href: "/about"},
 ];
 
 const rightLinks = [
-  { label: "Контакты", href: "/contacts" },
-  { label: "FAQ", href: "/faq" },
+  {label: "Контакты", href: "/contacts"},
+  {label: "FAQ", href: "/faq"},
 ];
 
 export default function Navbar() {
   const [mobileOpen, setMobileOpen] = useState(false);
 
   return (
-    <nav className="w-full relative z-50">
-      {/* Desktop navbar */}
-      <div className="hidden md:flex items-center justify-between mx-auto px-6 lg:px-10 h-[76px] max-w-[1696px]">
-        {/* Left nav links */}
-        <div className="flex items-center gap-10 lg:gap-[70px]">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className="flex flex-col items-center gap-[3px] group"
-            >
+      <nav className="w-full relative z-50">
+        {/* Desktop navbar */}
+        <div className="hidden md:flex items-center justify-between mx-auto px-6 lg:px-10 max-w-[1696px] py-[22px]">
+          {/* Left nav links */}
+          <div className="flex items-center gap-10 lg:gap-[70px]">
+            {navLinks.map((link) => (
+                <Link
+                    key={link.href}
+                    to={link.href}
+                    className="flex flex-col items-center gap-[3px] group relative"
+                >
               <span
-                className={`font-montserrat text-[18px] leading-normal ${
-                  link.active ? "font-semibold text-black" : "font-normal text-black/80"
-                }`}
+                  className={`font-montserrat text-[18px] leading-normal ${
+                      link.active ? "font-semibold text-black" : "font-normal text-black/80"
+                  }`}
               >
                 {link.label}
               </span>
-              {link.active && (
-                <div className="w-[26px] h-[2px] rounded-full bg-green" />
-              )}
-            </Link>
-          ))}
-        </div>
+                  {link.active && (
+                      <div className="w-[26px] h-[2px] rounded-full bg-green absolute bottom-[-3px]"/>
+                  )}
+                </Link>
+            ))}
+          </div>
 
-        {/* Logo */}
-        <div className="flex items-center relative">
-          <div className="relative flex items-center">
-            <div className="absolute inset-x-0 bottom-0 h-[57px] bg-black rounded-[40px]" />
-            <div className="relative flex items-center px-5 py-3 gap-2">
-              <AngelWingsIcon />
-              <span
-                className="font-montserrat font-bold text-[32px] leading-normal text-green tracking-wide"
-                style={{ letterSpacing: "0.02em" }}
-              >
-                IT-Angel
-              </span>
-            </div>
+          {/* Logo */}
+          <div className="flex items-center relative">
+                {/*<AngelWingsIcon/>*/}
+            <a href="/">
+              <img src="/logo.svg" alt=""/>
+            </a>
+          </div>
+
+          {/* Right section */}
+          <div className="flex items-center gap-6 lg:gap-[70px]">
+            {rightLinks.map((link) => (
+                <Link
+                    key={link.href}
+                    to={link.href}
+                    className="font-montserrat text-[18px] font-normal text-black/80 leading-normal"
+                >
+                  {link.label}
+                </Link>
+            ))}
+            <button
+                className="flex items-center justify-center bg-green rounded-[96px] px-8 py-4 h-[60px] font-montserrat font-bold text-[18px] uppercase text-black leading-normal whitespace-nowrap hover:opacity-90 transition-opacity">
+              Позвонить
+            </button>
           </div>
         </div>
 
-        {/* Right section */}
-        <div className="flex items-center gap-6 lg:gap-[70px]">
-          {rightLinks.map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              className="font-montserrat text-[18px] font-normal text-black/80 leading-normal"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <button className="flex items-center justify-center bg-green rounded-[96px] px-8 py-4 h-[60px] font-montserrat font-bold text-[18px] uppercase text-black leading-normal whitespace-nowrap hover:opacity-90 transition-opacity">
-            Позвонить
+        {/* Mobile navbar */}
+        <div className="md:hidden flex items-center justify-between px-5 py-4">
+          {/* Logo */}
+          {/*<div className="flex items-center bg-black rounded-[40px] px-4 py-2 gap-2">*/}
+            <AngelWingsIcon/>
+          {/*  <span className="font-montserrat font-bold text-[24px] text-green">*/}
+          {/*  IT-Angel*/}
+          {/*</span>*/}
+          {/*</div>*/}
+
+          {/* Hamburger */}
+          <button
+              onClick={() => setMobileOpen(!mobileOpen)}
+              className="flex flex-col gap-1.5 p-2"
+              aria-label="Toggle menu"
+          >
+            <span
+                className={`block w-6 h-0.5 bg-black transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`}/>
+            <span className={`block w-6 h-0.5 bg-black transition-opacity ${mobileOpen ? "opacity-0" : ""}`}/>
+            <span
+                className={`block w-6 h-0.5 bg-black transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`}/>
           </button>
         </div>
-      </div>
 
-      {/* Mobile navbar */}
-      <div className="md:hidden flex items-center justify-between px-5 py-4">
-        {/* Logo */}
-        <div className="flex items-center bg-black rounded-[40px] px-4 py-2 gap-2">
-          <AngelWingsIcon />
-          <span className="font-montserrat font-bold text-[24px] text-green">
-            IT-Angel
-          </span>
-        </div>
-
-        {/* Hamburger */}
-        <button
-          onClick={() => setMobileOpen(!mobileOpen)}
-          className="flex flex-col gap-1.5 p-2"
-          aria-label="Toggle menu"
-        >
-          <span className={`block w-6 h-0.5 bg-black transition-transform ${mobileOpen ? "rotate-45 translate-y-2" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-black transition-opacity ${mobileOpen ? "opacity-0" : ""}`} />
-          <span className={`block w-6 h-0.5 bg-black transition-transform ${mobileOpen ? "-rotate-45 -translate-y-2" : ""}`} />
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {mobileOpen && (
-        <div className="md:hidden bg-white border-t border-black/10 px-5 py-6 flex flex-col gap-5">
-          {[...navLinks, ...rightLinks].map((link) => (
-            <Link
-              key={link.href}
-              to={link.href}
-              onClick={() => setMobileOpen(false)}
-              className="font-montserrat text-[18px] text-black/80 font-medium"
-            >
-              {link.label}
-            </Link>
-          ))}
-          <button className="mt-2 bg-green rounded-[96px] px-8 py-4 font-montserrat font-bold text-[18px] uppercase text-black">
-            Позвонить
-          </button>
-        </div>
-      )}
-    </nav>
+        {/* Mobile menu */}
+        {mobileOpen && (
+            <div className="md:hidden bg-white border-t border-black/10 px-5 py-6 flex flex-col gap-5">
+              {[...navLinks, ...rightLinks].map((link) => (
+                  <Link
+                      key={link.href}
+                      to={link.href}
+                      onClick={() => setMobileOpen(false)}
+                      className="font-montserrat text-[18px] text-black/80 font-medium"
+                  >
+                    {link.label}
+                  </Link>
+              ))}
+              <button
+                  className="mt-2 bg-green rounded-[96px] px-8 py-4 font-montserrat font-bold text-[18px] uppercase text-black">
+                Позвонить
+              </button>
+            </div>
+        )}
+      </nav>
   );
 }
