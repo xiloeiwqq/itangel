@@ -44,7 +44,7 @@ export default function FeaturedCases() {
   return (
     <section className="relative overflow-hidden bg-white pb-20 pt-20">
       {/* Decorative gradient background */}
-      <div className="cases-section-bg absolute inset-0 z-0" />
+      <div className="cases-section-bg absolute inset-0 z-0" style={{ height: "1128px" }} />
 
       {/* Decorative blurred stars */}
       <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-brand-green blur-3xl opacity-20" />
@@ -52,7 +52,7 @@ export default function FeaturedCases() {
 
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="mb-16 text-center font-montserrat text-4xl font-bold uppercase text-black sm:text-5xl lg:text-6xl">
+        <h2 className="mb-16 text-center font-montserrat text-4xl font-bold uppercase text-black sm:text-5xl lg:text-[48px]">
           Избранные кейсы
         </h2>
 
@@ -63,7 +63,8 @@ export default function FeaturedCases() {
             {cases.slice(0, 3).map((caseItem) => (
               <div
                 key={caseItem.id}
-                className="group relative overflow-hidden rounded-2xl border border-brand-green/20 bg-gradient-to-br from-brand-green to-black p-6 transition-transform duration-300 hover:shadow-2xl sm:rounded-3xl md:p-5"
+                className="group relative overflow-hidden rounded-2xl border border-brand-green/20 bg-black p-6 transition-transform duration-300 hover:shadow-2xl sm:rounded-3xl md:p-5"
+                style={{ width: "310px", height: "375px" }}
               >
                 {/* Card content wrapper */}
                 <div className="flex h-full flex-col justify-between">
@@ -111,7 +112,8 @@ export default function FeaturedCases() {
             {cases.slice(3, 5).map((caseItem) => (
               <div
                 key={caseItem.id}
-                className="group relative overflow-hidden rounded-2xl border border-brand-green/20 bg-gradient-to-br from-brand-green to-black p-6 transition-transform duration-300 hover:shadow-2xl sm:rounded-3xl md:p-5"
+                className="group relative overflow-hidden rounded-2xl border border-brand-green/20 bg-black p-6 transition-transform duration-300 hover:shadow-2xl sm:rounded-3xl md:p-5"
+                style={{ width: "310px", height: "375px" }}
               >
                 {/* Card content wrapper */}
                 <div className="flex h-full flex-col justify-between">

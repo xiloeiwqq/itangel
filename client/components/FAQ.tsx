@@ -47,7 +47,7 @@ function FAQItem({
         <span className="font-montserrat text-sm font-bold uppercase tracking-wide text-white sm:text-base">
           {item.question}
         </span>
-        <span className="ml-4 flex-shrink-0">
+        <span className="ml-4 flex-shrink-0 bg-transparent">
           <span
             className={`flex h-9 w-9 items-center justify-center rounded-full bg-brand-green font-montserrat text-xl font-bold text-black transition-transform duration-300 ${
               isOpen ? "rotate-45" : ""
@@ -80,7 +80,7 @@ export default function FAQ() {
     <section className="bg-[#1e1e1e] py-20">
       <div className="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="mb-12 text-center font-montserrat text-4xl font-bold uppercase text-white sm:text-5xl">
+        <h2 className="mb-12 text-center font-montserrat text-4xl font-bold uppercase text-white sm:text-5xl lg:text-[48px]">
           Ответы на вопросы
         </h2>
 

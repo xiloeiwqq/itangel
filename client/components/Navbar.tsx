@@ -32,7 +32,7 @@ export default function Navbar() {
   return (
       <nav className="w-full relative z-50">
         {/* Desktop navbar */}
-        <div className="hidden md:flex items-center justify-between mx-auto px-6 lg:px-10 max-w-[1696px] py-[22px]">
+        <div className="hidden md:flex items-center justify-between mx-auto px-6 lg:px-10 max-w-[1696px] py-[22px] relative">
           {/* Left nav links */}
           <div className="flex items-center gap-10 lg:gap-[70px]">
             {navLinks.map((link) => (
@@ -56,7 +56,7 @@ export default function Navbar() {
           </div>
 
           {/* Logo */}
-          <div className="flex items-center relative">
+          <div className="flex items-center absolute left-1/2 -translate-x-1/2">
                 {/*<AngelWingsIcon/>*/}
             <a href="/">
               <img src="/logo.svg" alt=""/>

@@ -112,7 +112,7 @@ export default function TeamSection() {
 
       <div className="relative z-10 mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="mb-12 text-center font-montserrat text-4xl font-bold uppercase text-white sm:text-5xl">
+        <h2 className="mb-12 text-center font-montserrat text-4xl font-bold uppercase text-white sm:text-5xl lg:text-[48px]">
           Наша команда
         </h2>
 

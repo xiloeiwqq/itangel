@@ -104,7 +104,7 @@ const stats = [
 
 const StatCard = ({ value, label, icon }: { value: string; label: string; icon: React.ReactNode }) => (
   <div
-    className="relative flex flex-col justify-between rounded-[40px] overflow-hidden p-8 md:p-10 min-h-[280px] md:min-h-[340px] lg:min-h-[393px]"
+    className="relative flex h-[380px] w-[320px] flex-col justify-between overflow-hidden rounded-[40px] p-8 md:p-10"
     style={{
       border: "1px solid #A9FF6E",
       background: "linear-gradient(322deg, #353535 78.14%, #A9FF6E 213.71%)",
@@ -123,7 +123,10 @@ const StatCard = ({ value, label, icon }: { value: string; label: string; icon: 
 
     {/* Icon circle */}
     <div className="flex justify-end mt-6">
-      <div className="w-[130px] h-[130px] md:w-[154px] md:h-[154px] rounded-full bg-black flex items-center justify-center flex-shrink-0">
+      <div
+        className="h-[100px] w-[100px] flex-shrink-0 rounded-full flex items-center justify-center"
+        style={{ backgroundColor: "#191919" }}
+      >
         {icon}
       </div>
     </div>
@@ -167,13 +170,13 @@ export default function StatsSection() {
       {/* Stats grid */}
       <div className="px-5 md:px-10 lg:px-[60px] max-w-[1300px] mx-auto">
         {/* Top row: 3 cards */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-[30px] mb-5 md:mb-[30px]">
+        <div className="mb-[30px] flex flex-col items-center gap-[30px] sm:flex-row sm:flex-wrap sm:justify-center lg:flex-nowrap">
           {stats.slice(0, 3).map((stat, i) => (
             <StatCard key={i} {...stat} />
           ))}
         </div>
         {/* Bottom row: 2 cards centered */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 md:gap-[30px] lg:w-[calc(66.67%-10px)] lg:mx-auto">
+        <div className="flex flex-col items-center gap-[30px] sm:flex-row sm:justify-center lg:mx-auto lg:w-[calc(66.67%-10px)]">
           {stats.slice(3).map((stat, i) => (
             <StatCard key={i} {...stat} />
           ))}

@@ -97,9 +97,13 @@ export default function HowWeWork() {
       ),
     },
   ];
+  const orderedSteps = [steps[0], steps[1], steps[3], steps[2]];
 
   return (
-    <section className="relative overflow-hidden bg-brand-dark py-20">
+    <section
+      className="relative overflow-hidden bg-brand-dark py-20"
+      style={{ backgroundColor: "rgba(40, 40, 40, 1)", color: "rgba(0, 0, 0, 1)" }}
+    >
       {/* Decorative blurred circles */}
       <div className="pointer-events-none absolute right-0 top-40 h-96 w-96 rounded-full bg-brand-green blur-3xl opacity-10" />
       <div className="pointer-events-none absolute -bottom-20 -left-40 h-80 w-80 rounded-full bg-brand-green blur-3xl opacity-10" />
@@ -122,78 +126,72 @@ export default function HowWeWork() {
 
       <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
-        <h2 className="mb-20 text-center font-montserrat text-4xl font-bold uppercase text-white sm:text-5xl lg:text-6xl">
+        <h2 className="mb-20 text-center font-montserrat text-4xl font-bold uppercase text-white sm:text-5xl lg:text-[48px]">
           Как мы работаем
         </h2>
 
-        {/* Steps Grid */}
-        <div className="grid gap-8 md:gap-6">
-          {/* Top row - 2 cards */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {steps.slice(0, 2).map((step) => (
-              <div
-                key={step.id}
-                className="step-card-bg flex items-center gap-6 overflow-hidden rounded-2xl border border-brand-green p-6 sm:gap-8 sm:rounded-3xl sm:p-8"
-              >
-                {/* Icon */}
-                <div className="flex-shrink-0 rounded-xl bg-gray-700 p-3 sm:p-4">
-                  {step.icon}
-                </div>
+        <div className="relative space-y-10 md:space-y-14">
+          {orderedSteps.map((step, index) => (
+            <div key={step.id} className="relative">
+              <div className={`flex ${index % 2 === 0 ? "justify-start" : "justify-end"}`}>
+                <div className="relative w-full max-w-[560px]">
+                  <div className="step-card-bg flex w-full items-center gap-6 overflow-hidden rounded-2xl border border-brand-green p-6 sm:gap-8 sm:rounded-3xl sm:p-8">
+                    <div className="flex-shrink-0 rounded-xl bg-gray-700 p-3 sm:p-4">
+                      {step.icon}
+                    </div>
+                    <div className="flex flex-col justify-center gap-2">
+                      <h3 className="font-montserrat text-lg font-bold uppercase text-gray-200 sm:text-2xl">
+                        {step.title}
+                      </h3>
+                      <p className="font-montserrat text-sm text-white sm:text-base">
+                        {step.subtitle}
+                      </p>
+                    </div>
+                  </div>
 
-                {/* Content */}
-                <div className="flex flex-col justify-center gap-2">
-                  <h3 className="font-montserrat text-lg font-bold uppercase text-gray-200 sm:text-2xl">
-                    {step.title}
-                  </h3>
-                  <p className="font-montserrat text-sm text-white sm:text-base">
-                    {step.subtitle}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          {/* Vertical SVG lines connector (hidden on mobile) */}
-          <div className="relative h-32 hidden md:block">
-            <svg
-              className="absolute right-1/2 top-0 h-full w-40 translate-x-1/2"
-              viewBox="0 0 130 113"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M129.586 9.37718C130.383 9.60568 131.213 9.1454 131.442 8.34911C131.670 7.55282 131.210 6.72206 130.414 6.49356L130 7.93537L129.586 9.37718ZM-0.990699 114.091C-0.388331 114.659 0.561025 114.632 1.12975 114.03L10.3976 104.214C10.9663 103.611 10.939 102.662 10.3367 102.093C9.73431 101.524 8.78496 101.552 8.21624 102.154L-0.0218588 110.88L-8.74733 102.641C-9.3497 102.073 -10.2991 102.1 -10.8678 102.702C-11.4365 103.305 -11.4092 104.254 -10.8069 104.823L-0.990699 114.091ZM130 7.93537C130.414 6.49356 130.413 6.4934 130.412 6.49319C130.412 6.49302 130.411 6.49273 130.410 6.49241C130.407 6.49175 130.404 6.49083 130.400 6.48964C130.392 6.48726 130.380 6.48382 130.364 6.47933C130.332 6.47037 130.286 6.45724 130.225 6.44017C130.103 6.40601 129.922 6.35605 129.687 6.2919C129.216 6.16361 128.523 5.9786 127.630 5.74997C125.845 5.29273 123.260 4.66084 120.050 3.95919C113.631 2.55634 104.704 0.872352 94.6668 -0.250753C74.6774 -2.48753 49.9575 -2.54171 31.9774 6.59787L32.6571 7.93503L33.3368 9.2722C50.4805 0.0798182 74.432 0.503742 94.3332 2.73064C104.242 3.83937 113.064 5.5031 119.409 6.89C122.581 7.58323 125.131 8.20672 126.886 8.65615C127.763 8.88085 128.441 9.06199 128.899 9.18653C129.127 9.24879 129.301 9.2969 129.416 9.32922C129.474 9.34538 129.517 9.35759 129.546 9.36565C129.560 9.36969 129.570 9.37268 129.577 9.37461C129.581 9.37557 129.583 9.37627 129.585 9.3767C129.585 9.37691 129.586 9.37703 129.586 9.37714C129.586 9.37719 129.586 9.37718 130 7.93537ZM32.6571 7.93503L31.9774 6.59787C13.5322 16.5031 7.12671 30.8881 3.37321 48.1649C-0.401106 65.5376 -1.58316 86.2657 -1.49552 106.130C-1.40781 126.009 -0.0478304 145.091 1.28912 159.199C1.95775 166.254 2.621 172.069 3.11733 176.122C3.36550 178.148 3.57197 179.734 3.71656 180.815C3.78885 181.355 3.84567 181.769 3.88451 182.049C3.90392 182.189 3.91884 182.295 3.92895 182.366C3.93400 182.402 3.93785 182.429 3.94046 182.447C3.94176 182.456 3.94275 182.463 3.94343 182.468C3.94377 182.470 3.94404 182.472 3.94421 182.473C3.94440 182.475 3.94451 182.476 5.42923 182.262C6.91395 182.048 6.91390 182.048 6.91377 182.047C6.91362 182.046 6.91342 182.045 6.91312 182.043C6.91252 182.038 6.91161 182.032 6.91039 182.024C6.90795 182.006 6.90427 181.981 6.89938 181.946C6.88961 181.877 6.87503 181.773 6.85595 181.636C6.81780 181.361 6.76166 180.952 6.69006 180.417C6.54686 179.347 6.34181 177.772 6.09508 175.757C5.60159 171.728 4.94144 165.940 4.27574 158.916C2.94403 144.864 1.59163 125.877 1.50445 106.117C1.41722 86.3439 2.59778 65.8648 6.30482 48.8018C10.0327 31.6431 16.2272 18.3639 25.8186 12.4332L32.6571 7.93503Z"
-                stroke="#9EFB54"
-                strokeWidth="3"
-                fill="none"
-              />
-            </svg>
-          </div>
-
-          {/* Bottom row - 2 cards */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-            {steps.slice(2, 4).map((step) => (
-              <div
-                key={step.id}
-                className="step-card-bg flex items-center gap-6 overflow-hidden rounded-2xl border border-brand-green p-6 sm:gap-8 sm:rounded-3xl sm:p-8"
-              >
-                {/* Icon */}
-                <div className="flex-shrink-0 rounded-xl bg-gray-700 p-3 sm:p-4">
-                  {step.icon}
-                </div>
-
-                {/* Content */}
-                <div className="flex flex-col justify-center gap-2">
-                  <h3 className="font-montserrat text-lg font-bold uppercase text-gray-200 sm:text-2xl">
-                    {step.title}
-                  </h3>
-                  <p className="font-montserrat text-sm text-white sm:text-base">
-                    {step.subtitle}
-                  </p>
+                  {index < orderedSteps.length - 1 && (
+                    <div
+                      className={`pointer-events-none absolute hidden md:block top-1/2 -translate-y-1/2 ${
+                        index % 2 === 0 ? "left-full" : "right-full"
+                      }`}
+                    >
+                      <svg
+                        width="170"
+                        height="150"
+                        viewBox="0 0 170 150"
+                        fill="none"
+                        xmlns="http://www.w3.org/2000/svg"
+                        className={index % 2 === 0 ? "" : "scale-x-[-1]"}
+                      >
+                        <path
+                          d="M2 18C88 8 132 66 130 126"
+                          stroke="#9EFB54"
+                          strokeWidth="2.5"
+                          strokeLinecap="round"
+                        />
+                        <path d="M123 116L130 126L139 117" stroke="#9EFB54" strokeWidth="2.5" strokeLinecap="round" />
+                      </svg>
+                    </div>
+                  )}
                 </div>
               </div>
-            ))}
-          </div>
+
+              {index === 0 && (
+                <div className="pointer-events-none absolute hidden md:block left-[120px] -top-20">
+                  <svg width="88" height="84" viewBox="0 0 88 84" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                      d="M72 12C44 2 34 22 38 66"
+                      stroke="#9EFB54"
+                      strokeWidth="2.5"
+                      strokeLinecap="round"
+                    />
+                    <path d="M32 58L38 66L44 58" stroke="#9EFB54" strokeWidth="2.5" strokeLinecap="round" />
+                  </svg>
+                </div>
+              )}
+
+            </div>
+          ))}
         </div>
       </div>
     </section>

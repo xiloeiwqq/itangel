@@ -68,31 +68,12 @@ export default function Footer() {
           </div>
 
           {/* Center - Logo */}
-          <div className="flex flex-col items-center justify-center gap-2">
-            <div className="flex items-center gap-2">
-              {/* Wolf/Angel icon */}
-              <svg
-                width="32"
-                height="32"
-                viewBox="0 0 40 40"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M20 4C14 4 10 8 10 12C10 16 12 18 14 19C12 20 8 22 8 28C8 33 13 36 20 36C27 36 32 33 32 28C32 22 28 20 26 19C28 18 30 16 30 12C30 8 26 4 20 4Z"
-                  fill="#9EFB54"
-                />
-                <path
-                  d="M15 14C15 14 13 11 10 10C10 10 12 16 15 17M25 14C25 14 27 11 30 10C30 10 28 16 25 17"
-                  stroke="#1a1a1a"
-                  strokeWidth="1.5"
-                  strokeLinecap="round"
-                />
-              </svg>
-              <span className="font-montserrat text-xl font-bold text-white">
-                IT-Angel
-              </span>
-            </div>
+          <div className="col-start-2 flex items-center justify-center justify-self-center">
+            <img
+              src="/footer-logo.svg"
+              alt="IT-Angel"
+              className="h-auto w-[244px] max-w-full"
+            />
           </div>
 
           {/* Right - Legal links */}

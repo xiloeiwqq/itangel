@@ -1,10 +1,29 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 const ArrowIcon = ({ dark = false }: { dark?: boolean }) => (
   <svg width="41" height="41" viewBox="0 0 41 41" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path
       d="M5.13387 21.9311L31.4029 22.0424L22.4442 30.9256C21.7832 31.581 21.7787 32.6478 22.4341 33.3088C23.0894 33.9697 24.1567 33.9743 24.8177 33.3189L36.6657 21.5709C37.3266 20.9155 37.3311 19.8482 36.6758 19.1877L24.9278 7.33972C24.6001 7.00925 24.1693 6.84267 23.7379 6.84084C23.3068 6.83901 22.8746 7.00193 22.5442 7.32962C21.8832 7.98499 21.8787 9.05228 22.5341 9.71281L31.4172 18.6716L5.14816 18.5602C4.2178 18.5563 3.45953 19.3077 3.45559 20.2385C3.45164 21.1693 4.2031 21.9271 5.13387 21.9311Z"
       fill={dark ? "black" : "white"}
+    />
+  </svg>
+);
+
+const MinimalArrowIcon = ({ left = false, disabled = false }: { left?: boolean; disabled?: boolean }) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    className={left ? "rotate-180" : ""}
+  >
+    <path
+      d="M8 5L15 12L8 19"
+      stroke={disabled ? "rgba(255,255,255,0.35)" : "white"}
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
   </svg>
 );
@@ -67,6 +86,31 @@ const ACTIVE_INDEX = 2; // CRM is the featured one
 
 export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(ACTIVE_INDEX);
+  const mobileScrollRef = useRef<HTMLDivElement | null>(null);
+  const mobileCardRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const lastIndex = services.length - 1;
+
+  const goPrev = () => {
+    setActiveIndex((prev) => (prev === 0 ? lastIndex : prev - 1));
+  };
+
+  const goNext = () => {
+    setActiveIndex((prev) => (prev === lastIndex ? 0 : prev + 1));
+  };
+
+  useEffect(() => {
+    const container = mobileScrollRef.current;
+    const activeCard = mobileCardRefs.current[activeIndex];
+    if (!container || !activeCard) return;
+
+    const targetLeft =
+      activeCard.offsetLeft - container.clientWidth / 2 + activeCard.clientWidth / 2;
+
+    const maxScrollLeft = container.scrollWidth - container.clientWidth;
+    const boundedLeft = Math.max(0, Math.min(targetLeft, maxScrollLeft));
+
+    container.scrollTo({ left: boundedLeft, behavior: "smooth" });
+  }, [activeIndex]);
 
   return (
     <section className="relative bg-black py-16 md:py-20 overflow-hidden">
@@ -90,90 +134,124 @@ export default function ServicesSection() {
       </h2>
 
       {/* Cards row - desktop */}
-      <div className="hidden lg:flex items-end justify-center gap-4 xl:gap-5 px-6 xl:px-[60px] max-w-[1700px] mx-auto">
-        {services.map((service, index) => {
-          const isActive = index === activeIndex;
-          return isActive ? (
-            /* Featured card */
-            <div
-              key={service.id}
-              className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer"
-              style={{
-                width: "clamp(280px, 22vw, 389px)",
-                height: "clamp(380px, 30vw, 528px)",
-                border: "1px solid #A9FF6E",
-              }}
-            >
-              <img
-                src={service.image}
-                alt={service.label}
-                className="absolute inset-0 w-full h-full object-cover"
-              />
-              {/* Dark overlay */}
+      <div className="hidden lg:flex items-center gap-3 px-6 xl:px-[60px] max-w-[1700px] mx-auto">
+        <button
+          type="button"
+          aria-label="Предыдущая карточка"
+          className="h-[528px] flex items-center justify-center px-1"
+          onClick={goPrev}
+        >
+          <MinimalArrowIcon left />
+        </button>
+
+        <div className="flex-1 flex items-end justify-center gap-4 xl:gap-5">
+          {services.map((service, index) => {
+            const isActive = index === activeIndex;
+            return isActive ? (
+              /* Featured card */
               <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(0deg, #000 -1.54%, rgba(0,0,0,0.29) 124.19%)" }}
-              />
-              {/* Green circle arrow */}
-              <div className="absolute top-8 right-6 w-14 h-14 flex items-center justify-center rounded-full bg-green">
-                <ArrowIcon dark />
+                key={service.id}
+                className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out"
+                style={{
+                  width: "clamp(280px, 22vw, 389px)",
+                  height: "clamp(380px, 30vw, 528px)",
+                  border: "1px solid #A9FF6E",
+                }}
+              >
+                <img
+                  src={service.image}
+                  alt={service.label}
+                  className="absolute inset-0 w-full h-full object-cover"
+                />
+                {/* Dark overlay */}
+                <div
+                  className="absolute inset-0"
+                  style={{ background: "linear-gradient(0deg, #000 -1.54%, rgba(0,0,0,0.29) 124.19%)" }}
+                />
+                {/* Green circle arrow */}
+                <div className="absolute top-8 right-6 w-14 h-14 flex items-center justify-center rounded-full bg-green">
+                  <ArrowIcon dark />
+                </div>
+                {/* Text content */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <h3 className="font-montserrat font-semibold text-white text-[32px] md:text-[40px] leading-normal mb-3">
+                    {service.label}
+                  </h3>
+                  <p className="font-montserrat font-medium text-white text-[15px] md:text-[18px] leading-normal whitespace-pre-line">
+                    {service.description}
+                  </p>
+                </div>
               </div>
-              {/* Text content */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <h3 className="font-montserrat font-semibold text-white text-[32px] md:text-[40px] leading-normal mb-3">
-                  {service.label}
-                </h3>
-                <p className="font-montserrat font-medium text-white text-[15px] md:text-[18px] leading-normal whitespace-pre-line">
-                  {service.description}
-                </p>
-              </div>
-            </div>
-          ) : (
-            /* Side card */
-            <div
-              key={service.id}
-              className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer hover:opacity-90 transition-opacity"
-              style={{
-                width: "clamp(160px, 14vw, 246px)",
-                height: "clamp(280px, 26vw, 468px)",
-                background: "linear-gradient(180deg, #424242 11.89%, #102403 89.77%)",
-              }}
-              onClick={() => setActiveIndex(index)}
-            >
-              <img
-                src={service.image}
-                alt={service.label}
-                className="absolute inset-0 w-full h-full object-cover rounded-[15px]"
-              />
-              {/* Dark overlay */}
+            ) : (
+              /* Side card */
               <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.75) 0%, rgba(0,0,0,0.1) 60%)" }}
-              />
-              {/* Dashed arrow button */}
-              <div className="absolute top-4 right-4">
-                <DashedArrowButton />
+                key={service.id}
+                className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer hover:opacity-90 transition-all duration-500 ease-in-out"
+                style={{
+                  width: "clamp(160px, 14vw, 246px)",
+                  height: "clamp(280px, 26vw, 468px)",
+                  background: "linear-gradient(180deg, #424242 11.89%, #102403 89.77%)",
+                }}
+                onClick={() => setActiveIndex(index)}
+              >
+                <img
+                  src={service.image}
+                  alt={service.label}
+                  className="absolute inset-0 w-full h-full object-cover rounded-[15px]"
+                />
+                {/* Dark overlay */}
+                <div
+                  className="absolute bottom-0 right-0"
+                  style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 70%)" }}
+                />
+                {/* Dashed arrow button */}
+                <div className="absolute top-4 right-4">
+                  <DashedArrowButton />
+                </div>
+                {/* Label */}
+                <div className="absolute bottom-6 left-6 right-6">
+                  <span className="font-montserrat font-medium text-white uppercase text-[18px] xl:text-[24px] leading-normal">
+                    {service.label}
+                  </span>
+                </div>
               </div>
-              {/* Label */}
-              <div className="absolute bottom-6 left-6 right-6">
-                <span className="font-montserrat font-medium text-white uppercase text-[18px] xl:text-[24px] leading-normal">
-                  {service.label}
-                </span>
-              </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
+
+        <button
+          type="button"
+          aria-label="Следующая карточка"
+          className="h-[528px] flex items-center justify-center px-1"
+          onClick={goNext}
+        >
+          <MinimalArrowIcon />
+        </button>
       </div>
 
       {/* Cards - mobile/tablet horizontal scroll */}
-      <div className="lg:hidden overflow-x-auto scrollbar-hide px-5 pb-2">
-        <div className="flex gap-4 w-max">
+      <div className="lg:hidden px-5">
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            aria-label="Предыдущая карточка"
+            className="h-[380px] flex items-center justify-center px-1"
+            onClick={goPrev}
+          >
+            <MinimalArrowIcon left />
+          </button>
+
+        <div ref={mobileScrollRef} className="overflow-x-auto scrollbar-hide pb-2 flex-1">
+          <div className="flex gap-4 w-max">
           {services.map((service, index) => {
             const isActive = index === activeIndex;
             return (
               <div
                 key={service.id}
-                className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer"
+                ref={(node) => {
+                  mobileCardRefs.current[index] = node;
+                }}
+                className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out"
                 style={{
                   width: isActive ? "280px" : "180px",
                   height: isActive ? "380px" : "300px",
@@ -214,6 +292,17 @@ export default function ServicesSection() {
               </div>
             );
           })}
+          </div>
+        </div>
+
+          <button
+            type="button"
+            aria-label="Следующая карточка"
+            className="h-[380px] flex items-center justify-center px-1"
+            onClick={goNext}
+          >
+            <MinimalArrowIcon />
+          </button>
         </div>
       </div>
 

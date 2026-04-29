@@ -63,11 +63,9 @@ export default function PartnersSection() {
     
     .partners-scroll {
       animation: scroll-partners 40s linear infinite;
+      width: max-content;
     }
     
-    .partners-scroll:hover {
-      animation-play-state: paused;
-    }
   `;
 
   return (
@@ -88,7 +86,7 @@ export default function PartnersSection() {
 
       {/* Title on black background */}
       <div className="bg-black py-12 lg:py-16 relative z-10">
-        <h2 className="text-white text-center font-montserrat font-bold text-[32px] sm:text-[40px] lg:text-[48px] uppercase tracking-wide px-4">
+        <h2 className="text-white text-center font-montserrat font-bold text-[32px] sm:text-[48px] lg:text-[48px] uppercase tracking-wide px-4">
           С нами работают
         </h2>
       </div>
@@ -103,51 +101,53 @@ export default function PartnersSection() {
         }}
       >
         {/* Partners strip */}
-        <div className="bg-white overflow-hidden py-6 lg:py-8">
-          <div className="flex items-center gap-4 lg:gap-12 px-4 lg:px-8 partners-scroll whitespace-nowrap">
-            {/* First set */}
-            {partners.map((partner) =>
-              partner.pill ? (
-                <div key={`1-${partner.alt}`} className="flex items-center justify-center bg-white rounded-[35px] px-6 py-3 shadow-sm flex-shrink-0">
+        <div className="bg-white overflow-hidden py-6 lg:py-8 partners-marquee">
+          <div className="partners-scroll flex items-center whitespace-nowrap">
+            <div className="flex items-center gap-4 lg:gap-12 px-4 lg:px-8">
+              {partners.map((partner) =>
+                partner.pill ? (
+                  <div key={`1-${partner.alt}`} className="flex items-center justify-center bg-white rounded-[35px] px-6 py-3 shadow-sm flex-shrink-0">
+                    <img
+                      src={partner.src}
+                      alt={partner.alt}
+                      style={{ width: partner.width, height: partner.height }}
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
                   <img
+                    key={`1-${partner.alt}`}
                     src={partner.src}
                     alt={partner.alt}
                     style={{ width: partner.width, height: partner.height }}
-                    className="object-contain"
+                    className="object-contain flex-shrink-0"
                   />
-                </div>
-              ) : (
-                <img
-                  key={`1-${partner.alt}`}
-                  src={partner.src}
-                  alt={partner.alt}
-                  style={{ width: partner.width, height: partner.height }}
-                  className="object-contain flex-shrink-0"
-                />
-              )
-            )}
-            
-            {/* Duplicated set for seamless loop */}
-            {partners.map((partner) =>
-              partner.pill ? (
-                <div key={`2-${partner.alt}`} className="flex items-center justify-center bg-white rounded-[35px] px-6 py-3 shadow-sm flex-shrink-0">
+                )
+              )}
+            </div>
+
+            <div className="flex items-center gap-4 lg:gap-12 px-4 lg:px-8">
+              {partners.map((partner) =>
+                partner.pill ? (
+                  <div key={`2-${partner.alt}`} className="flex items-center justify-center bg-white rounded-[35px] px-6 py-3 shadow-sm flex-shrink-0">
+                    <img
+                      src={partner.src}
+                      alt={partner.alt}
+                      style={{ width: partner.width, height: partner.height }}
+                      className="object-contain"
+                    />
+                  </div>
+                ) : (
                   <img
+                    key={`2-${partner.alt}`}
                     src={partner.src}
                     alt={partner.alt}
                     style={{ width: partner.width, height: partner.height }}
-                    className="object-contain"
+                    className="object-contain flex-shrink-0"
                   />
-                </div>
-              ) : (
-                <img
-                  key={`2-${partner.alt}`}
-                  src={partner.src}
-                  alt={partner.alt}
-                  style={{ width: partner.width, height: partner.height }}
-                  className="object-contain flex-shrink-0"
-                />
-              )
-            )}
+                )
+              )}
+            </div>
           </div>
         </div>
       </div>
