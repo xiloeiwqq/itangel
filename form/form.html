@@ -481,6 +481,10 @@ document.getElementById('crmForm').addEventListener('submit', async function(e){
 
         updatePlaceholder();
 
+        if (window.parent && window.parent !== window) {
+          window.parent.postMessage({ type: 'crm-form-submitted' }, '*');
+        }
+
     }
     catch(error){
         console.error(error);

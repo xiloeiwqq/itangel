@@ -63,8 +63,15 @@ export default function PartnersSection() {
     }
     
     .partners-scroll {
+      display: inline-flex;
+      align-items: center;
       animation: scroll-partners 40s linear infinite;
       width: max-content;
+      will-change: transform;
+    }
+
+    .partners-scroll > div {
+      flex: 0 0 auto;
     }
     
   `;
@@ -104,7 +111,7 @@ export default function PartnersSection() {
           className="relative z-20 bg-white overflow-hidden py-6 lg:py-8 partners-marquee"
           style={{ boxShadow: "0 46px 90px -30px rgba(0, 0, 0, 0.55)" }}
         >
-          <div className="partners-scroll flex items-center whitespace-nowrap gap-[21px] pr-[21px]">
+          <div className="partners-scroll whitespace-nowrap gap-[21px]">
             {marqueePartners.map((partner, index) => (
               <div
                 key={`${partner.alt}-${index}`}
