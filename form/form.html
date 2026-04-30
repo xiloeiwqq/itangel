@@ -86,6 +86,33 @@
             box-shadow: 0 0 0 2px #d1d5db;
         }
 
+        input.invalid-field {
+            border: 1px solid #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25) !important;
+            outline: none;
+        }
+
+        .phone-input-wrapper.invalid {
+            border: 1px solid #ef4444;
+            box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.25);
+        }
+
+        .phone-input-wrapper.invalid input {
+            border: none;
+            box-shadow: none;
+        }
+
+        .checkbox-group.invalid .checkmark {
+            border: 2px solid #ef4444;
+            background-color: #fef2f2;
+        }
+
+        .invalid-message {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 8px;
+        }
+
         .country-select {
             border: none;
             background: transparent;
@@ -271,7 +298,7 @@
     <div class="form-container">
         <h2>Бесплатный аудит CRM</h2>
         
-        <form id="crmForm">
+        <form id="crmForm" novalidate>
             <div class="form-group">
                 <label for="name">Имя</label>
                 <input type="text" id="name" name="name" placeholder="Введите имя"  pattern="[A-Za-zА-Яа-яЁё\s\-]+" required>
@@ -349,6 +376,103 @@ function updatePlaceholder(){
 
 updatePlaceholder();
 
+const form = document.getElementById('crmForm');
+const requiredInputs = Array.from(form.querySelectorAll('input[required]'));
+
+function createInvalidMessage(input, text) {
+    removeInvalidMessage(input);
+    const message = document.createElement('div');
+    message.className = 'invalid-message';
+    message.textContent = text;
+
+    if (input.name === 'privacy_accepted') {
+        input.closest('.checkbox-group')?.append(message);
+    } else if (input.id === 'phone') {
+        input.closest('.phone-input-wrapper')?.after(message);
+    } else {
+        input.after(message);
+    }
+}
+
+function removeInvalidMessage(input) {
+    let container = input.parentElement;
+    if (input.name === 'privacy_accepted') {
+        container = input.closest('.checkbox-group');
+    } else if (input.id === 'phone') {
+        container = input.closest('.phone-input-wrapper')?.parentElement || input.parentElement;
+    }
+
+    const existing = container?.querySelector('.invalid-message');
+    if (existing) {
+        existing.remove();
+    }
+    if (input.id === 'phone') {
+        const wrapper = input.closest('.phone-input-wrapper');
+        if (wrapper?.nextElementSibling?.classList.contains('invalid-message')) {
+            wrapper.nextElementSibling.remove();
+        }
+    }
+}
+
+function setInvalidState(input) {
+    if (input.id === 'phone') {
+        input.closest('.phone-input-wrapper')?.classList.add('invalid');
+        return;
+    }
+    if (input.name === 'privacy_accepted') {
+        input.closest('.checkbox-group')?.classList.add('invalid');
+    }
+    input.classList.add('invalid-field');
+}
+
+function clearInvalidState(input) {
+    if (input.id === 'phone') {
+        input.closest('.phone-input-wrapper')?.classList.remove('invalid');
+    }
+    if (input.name === 'privacy_accepted') {
+        input.closest('.checkbox-group')?.classList.remove('invalid');
+    }
+    input.classList.remove('invalid-field');
+    removeInvalidMessage(input);
+}
+
+function clearAllInvalidStates() {
+    form.querySelectorAll('.invalid, .invalid-field').forEach((element) => {
+        element.classList.remove('invalid', 'invalid-field');
+    });
+    form.querySelectorAll('.invalid-message').forEach((element) => element.remove());
+}
+
+function validateField(input) {
+    clearInvalidState(input);
+    let valid = true;
+    let message = '';
+
+    if (input.name === 'privacy_accepted') {
+        if (!input.checked) {
+            valid = false;
+            message = 'Нужно согласиться с обработкой данных.';
+        }
+    } else if (input.value.trim() === '') {
+        valid = false;
+        message = 'Заполните это поле.';
+    } else if (input.id === 'name' && !input.value.trim().match(/^[A-Za-zА-Яа-яЁё\s\-]+$/)) {
+        valid = false;
+        message = 'Введите корректное имя.';
+    }
+
+    if (!valid) {
+        setInvalidState(input);
+        createInvalidMessage(input, message);
+    }
+
+    return valid;
+}
+
+requiredInputs.forEach((field) => {
+    field.addEventListener('input', () => clearInvalidState(field));
+    field.addEventListener('change', () => clearInvalidState(field));
+});
 
 selectSelected.addEventListener('click', function(){
     customSelect.classList.toggle('open');
@@ -424,9 +548,18 @@ function buildE164Phone(rawPhone, countryCode){
 
 
 
-document.getElementById('crmForm').addEventListener('submit', async function(e){
+form.addEventListener('submit', async function(e){
 
     e.preventDefault();
+    clearAllInvalidStates();
+
+    const isValid = requiredInputs.reduce((valid, input) => {
+        return validateField(input) && valid;
+    }, true);
+
+    if (!isValid) {
+        return;
+    }
 
     const payload = {
         name: document.getElementById('name').value.trim(),
@@ -466,6 +599,7 @@ document.getElementById('crmForm').addEventListener('submit', async function(e){
         alert('Заявка отправлена');
 
         this.reset();
+        clearAllInvalidStates();
 
         selectedValue='+7';
 
