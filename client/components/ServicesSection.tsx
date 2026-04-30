@@ -124,7 +124,7 @@ export default function ServicesSection() {
   }, [activeIndex]);
 
   return (
-    <section className="relative bg-black py-16 md:pt-[120px] md:pb-0 overflow-hidden">
+    <section data-no-reveal className="relative bg-black py-16 md:pt-[120px] md:pb-0 overflow-hidden">
       {/* Glow effects */}
       <div
         className="pointer-events-none absolute right-[-5%] top-[-5%] w-[25vw] h-[20vw] rounded-full"

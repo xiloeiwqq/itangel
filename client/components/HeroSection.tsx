@@ -1,7 +1,21 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 export default function HeroSection() {
   const [isAuditFormOpen, setIsAuditFormOpen] = useState(false);
+
+  useEffect(() => {
+    if (!isAuditFormOpen) {
+      return;
+    }
+
+    const originalOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      document.body.style.overflow = originalOverflow;
+    };
+  }, [isAuditFormOpen]);
 
   return (
     <section className="relative flex flex-col items-center justify-center overflow-hidden px-5 pt-16 pb-16 text-center md:pt-20 md:pb-24">
@@ -56,31 +70,33 @@ export default function HeroSection() {
         />
       </div>
 
-      {isAuditFormOpen && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4"
-          onClick={() => setIsAuditFormOpen(false)}
-        >
+      {isAuditFormOpen &&
+        createPortal(
           <div
-            className="relative h-[85vh] w-full max-w-[560px] overflow-hidden rounded-3xl bg-white"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[1000] flex items-center justify-center bg-black/70 px-4"
+            onClick={() => setIsAuditFormOpen(false)}
           >
-            <button
-              type="button"
-              aria-label="Закрыть форму"
-              onClick={() => setIsAuditFormOpen(false)}
-              className="absolute right-4 top-4 z-10 flex h-[54px] w-[54px] items-center justify-center rounded-full bg-black text-[30px] leading-none text-white hover:opacity-80"
+            <div
+              className="relative h-[85vh] w-full max-w-[560px] overflow-hidden rounded-3xl bg-white"
+              onClick={(e) => e.stopPropagation()}
             >
-              ×
-            </button>
-            <iframe
-              title="Бесплатный аудит CRM"
-              src="/form/form.html"
-              className="h-full w-full border-0"
-            />
-          </div>
-        </div>
-      )}
+              <button
+                type="button"
+                aria-label="Закрыть форму"
+                onClick={() => setIsAuditFormOpen(false)}
+                className="absolute right-4 top-4 z-10 flex h-[54px] w-[54px] items-center justify-center rounded-full bg-black text-[30px] leading-none text-white hover:opacity-80"
+              >
+                ×
+              </button>
+              <iframe
+                title="Бесплатный аудит CRM"
+                src="/form/form.html"
+                className="h-full w-full border-0"
+              />
+            </div>
+          </div>,
+          document.body,
+        )}
     </section>
   );
 }
