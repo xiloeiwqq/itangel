@@ -17,6 +17,17 @@ export default function HeroSection() {
     };
   }, [isAuditFormOpen]);
 
+  useEffect(() => {
+    const handleMessage = (event: MessageEvent) => {
+      if (event.data?.type === "crm-form-submitted") {
+        setIsAuditFormOpen(false);
+      }
+    };
+
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, []);
+
   return (
     <section className="relative flex flex-col items-center justify-center overflow-hidden px-5 pt-16 pb-16 text-center md:pt-20 md:pb-24">
       {/* Glow effects */}
