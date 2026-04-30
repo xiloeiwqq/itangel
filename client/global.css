@@ -63,3 +63,23 @@
     white-space: pre;
   }
 }
+
+@layer components {
+  .step-card-bg {
+    border-width: 0;
+    border-style: none;
+    border-color: rgba(0, 0, 0, 0);
+    border-image: none;
+    background-color: #353535;
+  }
+
+  .reveal-scope [data-reveal-item] {
+    opacity: 0;
+    transition: opacity 0.6s ease;
+    will-change: opacity;
+  }
+
+  .reveal-scope [data-reveal-item].is-visible {
+    opacity: 1;
+  }
+}

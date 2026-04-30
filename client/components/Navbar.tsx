@@ -36,22 +36,41 @@ export default function Navbar() {
           {/* Left nav links */}
           <div className="flex items-center gap-10 lg:gap-[70px]">
             {navLinks.map((link) => (
-                <Link
-                    key={link.href}
-                    to={link.href}
-                    className="flex flex-col items-center gap-[3px] group relative"
-                >
-              <span
-                  className={`font-montserrat text-[18px] leading-normal ${
-                      link.active ? "font-semibold text-black" : "font-normal text-black/80"
-                  }`}
-              >
-                {link.label}
-              </span>
-                  {link.active && (
-                      <div className="w-[26px] h-[2px] rounded-full bg-green absolute bottom-[-3px]"/>
-                  )}
-                </Link>
+                link.href === "/" ? (
+                    <a
+                        key={link.href}
+                        href="/"
+                        className="flex flex-col items-center gap-[3px] group relative"
+                    >
+                  <span
+                      className={`font-montserrat text-[18px] leading-normal transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 ${
+                          link.active ? "font-semibold text-black/80 group-hover:text-black" : "font-normal text-black/80 group-hover:text-black"
+                      }`}
+                  >
+                    {link.label}
+                  </span>
+                      <div
+                          className="w-full h-[2px] rounded-full bg-green absolute bottom-[-3px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
+                      />
+                    </a>
+                ) : (
+                    <Link
+                        key={link.href}
+                        to={link.href}
+                        className="flex flex-col items-center gap-[3px] group relative"
+                    >
+                  <span
+                      className={`font-montserrat text-[18px] leading-normal transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-105 ${
+                          link.active ? "font-semibold text-black/80 group-hover:text-black" : "font-normal text-black/80 group-hover:text-black"
+                      }`}
+                  >
+                    {link.label}
+                  </span>
+                      <div
+                          className="w-full h-[2px] rounded-full bg-green absolute bottom-[-3px] scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"
+                      />
+                    </Link>
+                )
             ))}
           </div>
 
@@ -69,13 +88,14 @@ export default function Navbar() {
                 <Link
                     key={link.href}
                     to={link.href}
-                    className="font-montserrat text-[18px] font-normal text-black/80 leading-normal"
+                    className="font-montserrat text-[18px] font-normal text-black/80 leading-normal relative group transition-all duration-300 hover:text-black hover:-translate-y-0.5 hover:scale-105"
                 >
                   {link.label}
+                  <span className="absolute left-0 -bottom-1 h-[2px] w-full rounded-full bg-green scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-center"/>
                 </Link>
             ))}
             <button
-                className="flex items-center justify-center bg-green rounded-[96px] px-8 py-4 h-[60px] font-montserrat font-bold text-[18px] uppercase text-black leading-normal whitespace-nowrap hover:opacity-90 transition-opacity">
+                className="flex items-center justify-center bg-green border-2 border-green rounded-[96px] px-8 py-4 h-[60px] font-montserrat font-bold text-[18px] uppercase text-black leading-normal whitespace-nowrap transition-all duration-300 hover:bg-black hover:text-green hover:border-black hover:shadow-[0_8px_24px_rgba(0,0,0,0.25)]">
               Позвонить
             </button>
           </div>

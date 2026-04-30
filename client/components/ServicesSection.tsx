@@ -51,38 +51,49 @@ const services = [
   {
     id: "bots",
     label: "БОТЫ И ПРИЛОЖЕНИЯ",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/46291b99655fca152305f58455693ce6fb78c224?width=512",
+    image: "/service/bots-n-apps_img.png",
     featured: false,
+    description:
+      "Разрабатываем Telegram-ботов, мобильные приложения и интеграции по API. Автоматизируем общение с клиентами и внутренние процессы.",
   },
   {
     id: "marketing",
     label: "ПРИВЛЕЧЕНИЕ КЛИЕНТОВ",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/f67069b0340d638fd4e90ccb4fe6a96fcfa76e7c?width=492",
+    image: "/service/clients_img.png",
     featured: false,
+    description:
+      "Настроим контекстную рекламу, SEO, рассылки. Используем парсинг баз для сбора обращений. Даём прозрачную отчётность по каждому рублю.",
   },
   {
     id: "crm",
     label: "CRM",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/ecdd0f519461696d204d54c8412b169ab4fa2be0?width=778",
+    image: "/service/crm_img.png",
     featured: true,
     description:
-      "Настроим CRM, чтобы вы видели воронку продаж, отчёты и загрузку менеджеров. Интегрируем телефонию, мессенджеры, сайт.\n\nОбучим сотрудников.",
+      "Настроим CRM, чтобы вы видели воронку продаж, отчёты и загрузку менеджеров. Интегрируем телефонию, мессенджеры, сайт.\n\nОбучим сотрудников. Работаем с amoCRM, Bitrix24, МойСклад и другими.",
   },
   {
     id: "design",
     label: "ДИЗАЙН",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/f8d1773e3050bdaaa9e42de5cab90acc680713bf?width=492",
+    image: "/service/design_png.png",
     featured: false,
+    description:
+      "Создаём фирменный стиль, веб-дизайн, афиши, меню для ресторанов. Учитываем ваш бренд и целевую аудиторию.",
   },
   {
     id: "sites",
     label: "САЙТЫ",
-    image: "https://api.builder.io/api/v1/image/assets/TEMP/0d0f8b0663ac4c3a08575531231e2d0ef5ffcf19?width=492",
+    image: "/service/sites_img.png",
     featured: false,
+    description:
+      "Создаём лендинги, корпоративные сайты и интернет-магазины. Учитываем SEO, адаптивность и скорость загрузки. После сдачи — поддержка и доработки.",
   },
 ];
 
 const ACTIVE_INDEX = 2; // CRM is the featured one
+const CARD_OVERLAY_STYLE = {
+  background: "linear-gradient(0deg, #000 -1.54%, rgba(0,0,0,0.29) 124.19%)",
+};
 
 export default function ServicesSection() {
   const [activeIndex, setActiveIndex] = useState(ACTIVE_INDEX);
@@ -113,7 +124,7 @@ export default function ServicesSection() {
   }, [activeIndex]);
 
   return (
-    <section className="relative bg-black py-16 md:py-20 overflow-hidden">
+    <section className="relative bg-black py-16 md:pt-[120px] md:pb-0 overflow-hidden">
       {/* Glow effects */}
       <div
         className="pointer-events-none absolute right-[-5%] top-[-5%] w-[25vw] h-[20vw] rounded-full"
@@ -144,7 +155,7 @@ export default function ServicesSection() {
           <MinimalArrowIcon left />
         </button>
 
-        <div className="flex-1 flex items-end justify-center gap-4 xl:gap-5">
+        <div className="flex-1 flex items-center justify-center gap-4 xl:gap-5">
           {services.map((service, index) => {
             const isActive = index === activeIndex;
             return isActive ? (
@@ -153,31 +164,31 @@ export default function ServicesSection() {
                 key={service.id}
                 className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer transition-all duration-500 ease-in-out"
                 style={{
-                  width: "clamp(280px, 22vw, 389px)",
-                  height: "clamp(380px, 30vw, 528px)",
+                  width: "389px",
+                  height: "528px",
                   border: "1px solid #A9FF6E",
                 }}
               >
                 <img
                   src={service.image}
                   alt={service.label}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className="absolute right-0 bottom-0 w-full h-full object-cover"
                 />
                 {/* Dark overlay */}
                 <div
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(0deg, #000 -1.54%, rgba(0,0,0,0.29) 124.19%)" }}
+                  className="absolute right-0 bottom-0 h-full w-full"
+                  style={CARD_OVERLAY_STYLE}
                 />
                 {/* Green circle arrow */}
                 <div className="absolute top-8 right-6 w-14 h-14 flex items-center justify-center rounded-full bg-green">
                   <ArrowIcon dark />
                 </div>
                 {/* Text content */}
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="font-montserrat font-semibold text-white text-[32px] md:text-[40px] leading-normal mb-3">
+                <div className="absolute bottom-6 left-6 right-6 flex flex-col gap-[13px]">
+                  <h3 className="font-montserrat font-semibold text-white text-[32px] md:text-[28px] leading-normal">
                     {service.label}
                   </h3>
-                  <p className="font-montserrat font-medium text-white text-[15px] md:text-[18px] leading-normal whitespace-pre-line">
+                  <p className="font-montserrat font-medium text-white text-[15px] md:text-[13px] leading-[19.5px] whitespace-pre-line">
                     {service.description}
                   </p>
                 </div>
@@ -188,8 +199,8 @@ export default function ServicesSection() {
                 key={service.id}
                 className="relative flex-shrink-0 rounded-[15px] overflow-hidden cursor-pointer hover:opacity-90 transition-all duration-500 ease-in-out"
                 style={{
-                  width: "clamp(160px, 14vw, 246px)",
-                  height: "clamp(280px, 26vw, 468px)",
+                  width: "246px",
+                  height: "468px",
                   background: "linear-gradient(180deg, #424242 11.89%, #102403 89.77%)",
                 }}
                 onClick={() => setActiveIndex(index)}
@@ -197,22 +208,23 @@ export default function ServicesSection() {
                 <img
                   src={service.image}
                   alt={service.label}
-                  className="absolute inset-0 w-full h-full object-cover rounded-[15px]"
+                  className="absolute right-0 bottom-0 w-full h-full object-cover rounded-[15px]"
                 />
                 {/* Dark overlay */}
                 <div
-                  className="absolute bottom-0 right-0"
-                  style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 70%)" }}
+                  className="absolute right-0 bottom-0 h-full w-full"
+                  style={CARD_OVERLAY_STYLE}
                 />
                 {/* Dashed arrow button */}
                 <div className="absolute top-4 right-4">
                   <DashedArrowButton />
                 </div>
-                {/* Label */}
+                {/* Label + description for screen readers (full copy on featured card) */}
                 <div className="absolute bottom-6 left-6 right-6">
-                  <span className="font-montserrat font-medium text-white uppercase text-[18px] xl:text-[24px] leading-normal">
+                  <span className="font-montserrat font-medium text-white uppercase text-[18px] xl:text-[22px] leading-normal">
                     {service.label}
                   </span>
+                  <p className="sr-only">{service.description}</p>
                 </div>
               </div>
             );
@@ -264,11 +276,11 @@ export default function ServicesSection() {
                 <img
                   src={service.image}
                   alt={service.label}
-                  className="absolute inset-0 w-full h-full object-cover"
+                  className={`absolute right-0 bottom-0 w-full h-full object-cover${isActive ? "" : " rounded-[15px]"}`}
                 />
                 <div
-                  className="absolute inset-0"
-                  style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.15) 70%)" }}
+                  className="absolute right-0 bottom-0 h-full w-full"
+                  style={CARD_OVERLAY_STYLE}
                 />
                 {isActive ? (
                   <div className="absolute top-4 right-4 w-12 h-12 flex items-center justify-center rounded-full bg-green">
@@ -283,11 +295,15 @@ export default function ServicesSection() {
                   <h3 className={`font-montserrat text-white uppercase leading-tight ${isActive ? "font-semibold text-[28px] mb-2" : "font-medium text-[18px]"}`}>
                     {service.label}
                   </h3>
-                  {isActive && service.description && (
-                    <p className="font-montserrat font-medium text-white text-[13px] leading-normal mt-2 whitespace-pre-line">
-                      {service.description}
-                    </p>
-                  )}
+                  <p
+                    className={
+                      isActive
+                        ? "font-montserrat font-medium text-white text-[13px] leading-normal mt-2 whitespace-pre-line"
+                        : "sr-only"
+                    }
+                  >
+                    {service.description}
+                  </p>
                 </div>
               </div>
             );

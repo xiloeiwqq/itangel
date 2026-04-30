@@ -1,20 +1,27 @@
+const caseCardStyle = {
+  width: "310px",
+  height: "375px",
+  background: "linear-gradient(343deg, rgba(0, 0, 0, 1) 34%, rgba(50, 80, 26, 1) 100%)",
+} as const;
+
 export default function FeaturedCases() {
   const cases = [
     {
       id: 1,
       title: "ЮМАН",
       description: "CRM с нуля + сайт\n+ фирменный стиль",
-      logoSrc:
-        "https://api.builder.io/api/v1/image/assets/TEMP/bb0e2604406c4eafa63f2a9a68cd3d40923d0085?width=359",
+      logoSrc: "/company_logo/yuman.svg",
       hasImage: true,
+      logoWidth: 214,
+      logoHeight: 83,
     },
     {
       id: 2,
       title: "BARO\n(США, Флорида)",
       description: "Автоматизация\nkommoCRM",
-      imageSrc:
-        "https://api.builder.io/api/v1/image/assets/TEMP/6737d1ac913ce3b165d70f85e45bf6b2b014c013?width=282",
-      isCircleImage: true,
+      logoSrc: "/company_logo/baro2nd.svg",
+      hasImage: true,
+      noLogoPanel: true,
     },
     {
       id: 3,
@@ -27,122 +34,113 @@ export default function FeaturedCases() {
       id: 4,
       title: "Rotado",
       description: "Управленческая отчётность\nBI + автоматизация",
-      logoSrc:
-        "https://api.builder.io/api/v1/image/assets/TEMP/138353834500d0cd5a32c6c6bd9097b0208e1b6e?width=361",
+      logoSrc: "/company_logo/rotado.svg",
       hasImage: true,
+      logoImgClassName: "h-8 w-[213px] object-contain",
     },
     {
       id: 5,
       title: "Packplace",
       description: "Комплексное\nIT-обслуживание 3+ года",
-      logoSrc:
-        "https://api.builder.io/api/v1/image/assets/TEMP/b33fb784d04f2affcee385bf9c644da34e11c3ff?width=426",
+      logoSrc: "/company_logo/packplace.svg",
       hasImage: true,
+      logoImgClassName: "h-8 w-[213px] object-contain",
     },
   ];
 
   return (
-    <section className="relative overflow-hidden bg-white pb-20 pt-20">
+    <div
+      className="relative overflow-x-hidden overflow-y-visible bg-white pb-20 pt-20"
+      style={{
+        backgroundImage: "linear-gradient(90deg, rgba(0, 0, 0, 1) 47%, rgba(255, 255, 255, 1) 100%)",
+        backgroundClip: "text",
+        WebkitBackgroundClip: "text",
+        color: "transparent",
+      }}
+    >
       {/* Decorative gradient background */}
-      <div className="cases-section-bg absolute inset-0 z-0" style={{ height: "1128px" }} />
-
-      {/* Decorative blurred stars */}
-      <div className="pointer-events-none absolute -left-40 top-0 h-96 w-96 rounded-full bg-brand-green blur-3xl opacity-20" />
-      <div className="pointer-events-none absolute -right-40 top-20 h-80 w-80 rounded-full bg-brand-green blur-3xl opacity-10" />
-
+      <div
+        className="cases-section-bg absolute bottom-0 right-0 z-0 w-full"
+        style={{
+          height: "1128px",
+          background: "linear-gradient(0deg, rgba(40, 40, 40, 1) 7%, rgba(255, 255, 255, 0) 30%)",
+          WebkitBackgroundClip: "unset",
+          color: "rgba(0, 0, 0, 1)",
+        }}
+      />
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Section Title */}
         <h2 className="mb-16 text-center font-montserrat text-4xl font-bold uppercase text-black sm:text-5xl lg:text-[48px]">
           Избранные кейсы
         </h2>
 
-        {/* Cases Grid - Responsive Layout */}
-        <div className="grid gap-8 md:gap-6">
-          {/* First Row - 3 cards */}
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-            {cases.slice(0, 3).map((caseItem) => (
+        {/* Cases: centered wrap, 30px gap between cards and between rows */}
+        <div className="flex w-full flex-wrap justify-center gap-x-[30px] gap-y-[30px]">
+          {cases.map((caseItem) => (
+            <div
+              key={caseItem.id}
+              className={
+                "noLogoPanel" in caseItem && caseItem.noLogoPanel
+                  ? "group relative overflow-hidden rounded-[40px] px-6 pb-6 pt-[20px] transition-transform duration-300 md:px-5 md:pb-5 md:pt-[20px]"
+                  : "group relative overflow-hidden rounded-[40px] p-6 transition-transform duration-300 md:p-5"
+              }
+              style={caseCardStyle}
+            >
               <div
-                key={caseItem.id}
-                className="group relative overflow-hidden rounded-2xl border border-brand-green/20 bg-black p-6 transition-transform duration-300 hover:shadow-2xl sm:rounded-3xl md:p-5"
-                style={{ width: "310px", height: "375px" }}
+                className={
+                  "noLogoPanel" in caseItem && caseItem.noLogoPanel
+                    ? "flex h-full flex-col justify-start gap-[48px]"
+                    : "flex h-full flex-col justify-start gap-[85px]"
+                }
               >
-                {/* Card content wrapper */}
-                <div className="flex h-full flex-col justify-between">
-                  {/* Top section - Logo or Image */}
-                  <div className="mb-8 flex h-24 items-center justify-center rounded-2xl bg-white sm:h-28">
-                    {caseItem.logoSrc && caseItem.hasImage && (
-                      <img
-                        src={caseItem.logoSrc}
-                        alt={caseItem.title}
-                        className="h-14 object-contain sm:h-16"
-                      />
-                    )}
-                    {caseItem.isCircleImage && caseItem.imageSrc && (
-                      <div className="relative h-32 w-32 rounded-full p-2">
-                        <img
-                          src={caseItem.imageSrc}
-                          alt={caseItem.title}
-                          className="h-full w-full rounded-full object-cover"
-                        />
-                      </div>
-                    )}
-                    {caseItem.textOnly && (
-                      <div className="text-center font-montserrat text-lg font-bold text-black sm:text-xl">
-                        {caseItem.text}
-                      </div>
-                    )}
-                  </div>
+                <div
+                  className={
+                    "noLogoPanel" in caseItem && caseItem.noLogoPanel
+                      ? "flex h-[148px] shrink-0 items-center justify-center"
+                      : "flex h-24 shrink-0 items-center justify-center rounded-2xl bg-white sm:h-28"
+                  }
+                >
+                  {caseItem.logoSrc && caseItem.hasImage && (
+                    <img
+                      src={caseItem.logoSrc}
+                      alt={caseItem.title}
+                      className={
+                        "logoWidth" in caseItem && caseItem.logoWidth != null
+                          ? "object-contain"
+                          : "logoImgClassName" in caseItem && caseItem.logoImgClassName
+                            ? caseItem.logoImgClassName
+                            : "h-[148px] w-[148px] object-contain"
+                      }
+                      style={
+                        "logoWidth" in caseItem && caseItem.logoWidth != null
+                          ? {
+                              width: caseItem.logoWidth,
+                              height: caseItem.logoHeight ?? caseItem.logoWidth,
+                            }
+                          : undefined
+                      }
+                    />
+                  )}
+                  {"textOnly" in caseItem && caseItem.textOnly && caseItem.text && (
+                    <div className="text-center font-montserrat text-lg font-bold text-black sm:text-xl">
+                      {caseItem.text}
+                    </div>
+                  )}
+                </div>
 
-                  {/* Bottom section - Title and Description */}
-                  <div className="space-y-3">
-                    <h3 className="whitespace-pre-line font-montserrat text-2xl font-bold text-white sm:text-3xl">
-                      {caseItem.title}
-                    </h3>
-                    <p className="whitespace-pre-line font-montserrat text-sm text-white/90 sm:text-base">
-                      {caseItem.description}
-                    </p>
-                  </div>
+                <div className="space-y-[10px]">
+                  <h3 className="whitespace-pre-line font-montserrat text-2xl font-bold tracking-[0%] text-white sm:text-[28px] sm:leading-[34px]">
+                    {caseItem.title}
+                  </h3>
+                  <p className="whitespace-pre-line font-montserrat text-sm leading-5 text-white/90 sm:text-base sm:leading-5">
+                    {caseItem.description}
+                  </p>
                 </div>
               </div>
-            ))}
-          </div>
-
-          {/* Second Row - 2 cards centered */}
-          <div className="mx-auto grid w-full grid-cols-1 gap-6 md:w-2/3 md:grid-cols-2">
-            {cases.slice(3, 5).map((caseItem) => (
-              <div
-                key={caseItem.id}
-                className="group relative overflow-hidden rounded-2xl border border-brand-green/20 bg-black p-6 transition-transform duration-300 hover:shadow-2xl sm:rounded-3xl md:p-5"
-                style={{ width: "310px", height: "375px" }}
-              >
-                {/* Card content wrapper */}
-                <div className="flex h-full flex-col justify-between">
-                  {/* Top section - Logo */}
-                  <div className="mb-8 flex h-24 items-center justify-center rounded-2xl bg-white sm:h-28">
-                    {caseItem.logoSrc && (
-                      <img
-                        src={caseItem.logoSrc}
-                        alt={caseItem.title}
-                        className="h-12 object-contain sm:h-14"
-                      />
-                    )}
-                  </div>
-
-                  {/* Bottom section - Title and Description */}
-                  <div className="space-y-3">
-                    <h3 className="whitespace-pre-line font-montserrat text-2xl font-bold text-white sm:text-3xl">
-                      {caseItem.title}
-                    </h3>
-                    <p className="whitespace-pre-line font-montserrat text-sm text-white/90 sm:text-base">
-                      {caseItem.description}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
+            </div>
+          ))}
         </div>
       </div>
-    </section>
+    </div>
   );
 }

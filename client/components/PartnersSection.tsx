@@ -1,56 +1,57 @@
 const partners = [
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/3a5b61e82bbffef13d69677a0e5c20148d9e5a1d?width=520",
-    alt: "ADO",
-    width: 130,
-    height: 23,
+    src: "/company_logo/baro.svg",
+    alt: "Baro",
+    width: 98,
+    height: 98,
   },
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/d82fb9201a0cdcb0e668e1ed5592ce66966d28b2?width=334",
-    alt: "ЮМАН",
-    width: 120,
-    height: 42,
-    pill: true,
-  },
-  {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/f2199d9f242fa9e17d4349d788199c6bbc16cfd4?width=458",
-    alt: "ОАО ТЕКСТИЛЬМАШ",
-    width: 150,
-    height: 36,
-  },
-  {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/36fad0b439c42734d035c83d9ff9195756536f10?width=278",
-    alt: "Impulse Home",
-    width: 90,
-    height: 90,
-  },
-  {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/50296903816d56887240bcca?width=282",
-    alt: "НоваДом",
-    width: 95,
-    height: 95,
-  },
-  {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/32495808e8b1fbbf572fd569fb1f5723688f4417?width=632",
-    alt: "packplace",
-    width: 200,
-    height: 31,
-  },
-  {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/fa4ff3c22c043edd9d3257352f0d6dd1d67145e0?width=196",
-    alt: "Logo",
-    width: 65,
+    src: "/company_logo/yuman.svg",
+    alt: "Юман",
+    width: 165,
     height: 65,
   },
   {
-    src: "https://api.builder.io/api/v1/image/assets/TEMP/ff257cec53c2e04f6e0f489a2d34d0cd63ab6e06?width=516",
+    src: "/company_logo/tekstilmash.svg",
+    alt: "Текстильмаш",
+    width: 178,
+    height: 42,
+  },
+  {
+    src: "/company_logo/impulsehome.svg",
+    alt: "Impulse Home",
+    width: 139,
+    height: 53,
+  },
+  {
+    src: "/company_logo/novadom.svg",
+    alt: "НоваДом",
+    width: 109,
+    height: 77,
+  },
+  {
+    src: "/company_logo/packplace.svg",
+    alt: "packplace",
+    width: 271,
+    height: 42,
+  },
+  {
+    src: "/company_logo/rotado.svg",
+    alt: "Rotado",
+    width: 235,
+    height: 42,
+  },
+  {
+    src: "/company_logo/sespel.svg",
     alt: "СЕСПЕН",
-    width: 168,
-    height: 37,
+    width: 190,
+    height: 42,
   },
 ];
 
 export default function PartnersSection() {
+  const marqueePartners = [...partners, ...partners];
+
   const animationStyle = `
     @keyframes scroll-partners {
       0% {
@@ -69,7 +70,7 @@ export default function PartnersSection() {
   `;
 
   return (
-    <section className="relative overflow-hidden">
+    <div className="relative z-10 overflow-visible">
       <style>{animationStyle}</style>
       
       {/* Right green glow decoration */}
@@ -91,66 +92,36 @@ export default function PartnersSection() {
         </h2>
       </div>
 
-      {/* Gradient from black to white */}
+      {/* Gradient from black to white — pt + inner py суммарно = py заголовка для ровного вертикального шага */}
       <div
-        className="relative z-10"
+        className="relative z-10 pt-6 pb-0 lg:pt-8"
         style={{
           background: "linear-gradient(to bottom, #000 0%, #fff 60%)",
-          paddingTop: "32px",
-          paddingBottom: "0px",
         }}
       >
         {/* Partners strip */}
-        <div className="bg-white overflow-hidden py-6 lg:py-8 partners-marquee">
-          <div className="partners-scroll flex items-center whitespace-nowrap">
-            <div className="flex items-center gap-4 lg:gap-12 px-4 lg:px-8">
-              {partners.map((partner) =>
-                partner.pill ? (
-                  <div key={`1-${partner.alt}`} className="flex items-center justify-center bg-white rounded-[35px] px-6 py-3 shadow-sm flex-shrink-0">
-                    <img
-                      src={partner.src}
-                      alt={partner.alt}
-                      style={{ width: partner.width, height: partner.height }}
-                      className="object-contain"
-                    />
-                  </div>
-                ) : (
-                  <img
-                    key={`1-${partner.alt}`}
-                    src={partner.src}
-                    alt={partner.alt}
-                    style={{ width: partner.width, height: partner.height }}
-                    className="object-contain flex-shrink-0"
-                  />
-                )
-              )}
-            </div>
-
-            <div className="flex items-center gap-4 lg:gap-12 px-4 lg:px-8">
-              {partners.map((partner) =>
-                partner.pill ? (
-                  <div key={`2-${partner.alt}`} className="flex items-center justify-center bg-white rounded-[35px] px-6 py-3 shadow-sm flex-shrink-0">
-                    <img
-                      src={partner.src}
-                      alt={partner.alt}
-                      style={{ width: partner.width, height: partner.height }}
-                      className="object-contain"
-                    />
-                  </div>
-                ) : (
-                  <img
-                    key={`2-${partner.alt}`}
-                    src={partner.src}
-                    alt={partner.alt}
-                    style={{ width: partner.width, height: partner.height }}
-                    className="object-contain flex-shrink-0"
-                  />
-                )
-              )}
-            </div>
+        <div
+          className="relative z-20 bg-white overflow-hidden py-6 lg:py-8 partners-marquee"
+          style={{ boxShadow: "0 46px 90px -30px rgba(0, 0, 0, 0.55)" }}
+        >
+          <div className="partners-scroll flex items-center whitespace-nowrap gap-[21px] pr-[21px]">
+            {marqueePartners.map((partner, index) => (
+              <div
+                key={`${partner.alt}-${index}`}
+                className="flex shrink-0 items-center justify-center"
+                aria-hidden={index >= partners.length}
+              >
+                <img
+                  src={partner.src}
+                  alt={index < partners.length ? partner.alt : ""}
+                  style={{ width: partner.width, height: partner.height }}
+                  className="object-contain"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }

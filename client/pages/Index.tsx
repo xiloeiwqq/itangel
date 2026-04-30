@@ -9,10 +9,50 @@ import HowWeWork from "@/components/HowWeWork";
 import TeamSection from "@/components/TeamSection";
 import FAQ from "@/components/FAQ";
 import Footer from "@/components/Footer";
+import { useEffect, useRef } from "react";
 
 export default function Index() {
+  const revealScopeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const revealScope = revealScopeRef.current;
+    if (!revealScope) {
+      return;
+    }
+
+    const revealElements = Array.from(revealScope.querySelectorAll<HTMLElement>("*")).filter(
+      (element) =>
+        !element.closest("[data-no-reveal]") &&
+        !["SCRIPT", "STYLE", "LINK", "META"].includes(element.tagName),
+    );
+
+    revealElements.forEach((element) => {
+      element.setAttribute("data-reveal-item", "");
+    });
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) {
+            return;
+          }
+
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        });
+      },
+      {
+        threshold: 0.12,
+      },
+    );
+
+    revealElements.forEach((element) => observer.observe(element));
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <div className="min-h-screen bg-white overflow-hidden font-montserrat">
+    <div ref={revealScopeRef} className="reveal-scope min-h-screen bg-white overflow-x-hidden overflow-y-visible font-montserrat">
       {/* Main white section with rounded bottom corners */}
       <div
         className="relative bg-white overflow-hidden"
@@ -20,6 +60,7 @@ export default function Index() {
       >
         {/* Navbar border wrapper */}
         <div
+          data-no-reveal
           className="relative z-50"
           style={{
             borderBottom: "1px solid #858585",
@@ -35,7 +76,7 @@ export default function Index() {
       </div>
 
       {/* Values Section (outside the rounded white block) */}
-      <div className="relative bg-white pt-16 md:pt-24">
+      <div className="relative bg-white pt-16 md:pt-6">
         <ValuesSection />
       </div>
 
@@ -45,11 +86,11 @@ export default function Index() {
       {/* Stats Section */}
       <StatsSection />
 
-      {/* Partners Section */}
-      <PartnersSection />
-
-      {/* Featured Cases Section */}
-      <FeaturedCases />
+      {/* Partners + Featured Cases unified section */}
+      <section className="relative overflow-x-hidden overflow-y-visible bg-white">
+        <PartnersSection />
+        <FeaturedCases />
+      </section>
 
       {/* How We Work Section */}
       <HowWeWork />
@@ -61,7 +102,9 @@ export default function Index() {
       <FAQ />
 
       {/* Footer */}
-      <Footer />
+      <div data-no-reveal>
+        <Footer />
+      </div>
     </div>
   );
 }
